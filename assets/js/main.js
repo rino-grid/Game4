@@ -1,47 +1,9 @@
 /**
  * EXAMEN - Main JavaScript
- * Handles UI interactions and game functionality
+ * Handles UI interactions and functionality
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Button event listeners
-    const steamButton = document.querySelector('.btn-primary');
-    const gridbasedGamesButton = document.querySelector('.btn-secondary');
-    const discordButton = document.querySelector('.btn-ghost');
-    const exitButton = document.querySelector('.btn-destructive');
-    
-    if (steamButton) {
-        steamButton.addEventListener('click', () => {
-            console.log('Opening Steam...');
-            window.open('https://store.steampowered.com/', '_blank');
-        });
-    }
-    
-    if (gridbasedGamesButton) {
-        gridbasedGamesButton.addEventListener('click', () => {
-            console.log('Opening Gridbased Games...');
-            window.open('https://gridbased.netlify.app/', '_blank');
-        });
-    }
-    
-    if (discordButton) {
-        discordButton.addEventListener('click', () => {
-            console.log('Opening Discord...');
-            window.open('https://discord.com/', '_blank');
-        });
-    }
-    
-    if (exitButton) {
-        exitButton.addEventListener('click', () => {
-            console.log('Exiting...');
-            // Add exit functionality here
-            if (confirm('Are you sure you want to exit?')) {
-                console.log('Exit confirmed');
-                // Add actual exit logic here
-            }
-        });
-    }
-    
     // Accordion functionality
     const accordionItems = document.querySelectorAll('.accordion-item');
     
@@ -78,5 +40,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Add any additional initialization code here
-    console.log('EXAMEN game initialized');
+    console.log('EXAMEN initialized');
 });
