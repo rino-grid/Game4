@@ -1,6 +1,6 @@
-# EXAMEN - An Immersive Videogame Experience
+# EXAMEN - Website
 
-A visually striking web-based game with dynamic WebGL shader effects.
+A visually striking website with dynamic WebGL shader effects.
 
 ## Project Structure
 
@@ -29,7 +29,7 @@ EXAMEN/
 - Responsive design that works on various screen sizes
 - Clean, modern UI with a dark theme
 - shadcn UI components including buttons, image cards, and accordion
-- 2x2 grid of exam type images
+- 2x2 grid of images
 - Print-friendly styling
 
 ## Technology Stack
@@ -75,12 +75,3 @@ The UI uses shadcn UI components for a clean, modern look:
   - Destructive buttons for potentially dangerous actions
 - Image card grid with hover effects
 - Accordion component for FAQ section
-
-### Future Enhancements
-
-Potential areas for future development:
-- Add actual game functionality
-- Implement user authentication
-- Add score tracking and leaderboards
-- Create additional visual effects
-- Add more shadcn UI components like dialogs, tooltips, and form elements
