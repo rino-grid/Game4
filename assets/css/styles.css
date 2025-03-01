@@ -1,0 +1,431 @@
+/* EXAMEN - Main Stylesheet */
+
+/* shadcn UI CSS variables */
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+}
+
+/* Global font settings */
+body {
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Keep Inter font for specific UI components that need it */
+.shadcn-component {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Font utilities */
+.font-biz {
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+}
+
+/* Black Scrollbar - smaller and darker */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222222;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333333;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.7) 50%, #000000 100%);
+    z-index: 5;
+}
+
+.header-text {
+    font-size: clamp(3rem, 10vw, 6rem);
+    text-align: center;
+    letter-spacing: 0;
+    z-index: 10;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.content {
+    background-color: #000000;
+    padding: 3rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.button-group a {
+    flex: 1 1 auto;
+    min-width: 150px;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .button-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .button-group a {
+        width: 100%;
+    }
+}
+
+/* shadcn UI Button Styles */
+.btn-primary,
+.btn-secondary,
+.btn-ghost,
+.btn-destructive {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    font-weight: bold;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    height: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'BIZ UDMincho', serif;
+}
+
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-ghost:focus,
+.btn-destructive:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-ghost:disabled,
+.btn-destructive:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+}
+
+.btn-secondary:hover {
+    background-color: hsl(var(--secondary) / 0.8);
+}
+
+/* Ghost Button */
+.btn-ghost {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+}
+
+.btn-ghost:hover {
+    background-color: hsl(var(--muted) / 0.3);
+}
+
+/* Destructive Button */
+.btn-destructive {
+    background-color: hsl(var(--destructive));
+    color: hsl(var(--destructive-foreground));
+}
+
+.btn-destructive:hover {
+    background-color: hsl(var(--destructive) / 0.9);
+}
+
+/* Image Card Styles */
+.image-card {
+    background-color: hsl(var(--card));
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid hsl(var(--border));
+    position: relative;
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+}
+
+.image-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Horizontal scanlines effect */
+.image-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.25) 0px,
+        rgba(255, 255, 255, 0.25) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    background-size: 100% 5px;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+    opacity: 1;
+    animation: scanlineMove 8s linear infinite;
+}
+
+@keyframes scanlineMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 100px;
+    }
+}
+
+/* Remove the flicker effect */
+.image-card::after {
+    display: none;
+}
+
+/* Accordion Styles */
+.accordion-container {
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    overflow: hidden;
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+}
+
+.accordion-item {
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    color: hsl(var(--foreground));
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'BIZ UDMincho', serif;
+}
+
+.accordion-trigger:hover {
+    background-color: hsl(var(--muted) / 0.1);
+}
+
+.accordion-icon {
+    transition: transform 0.2s ease;
+}
+
+.accordion-item[data-state="open"] .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.2s ease;
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+}
+
+.accordion-item[data-state="open"] .accordion-content {
+    height: auto;
+}
+
+/* Footer Styles */
+footer {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+}
+
+footer .social-links {
+    margin-bottom: 3.5rem;
+    width: 100%;
+    max-width: 700px;
+}
+
+footer .social-links a {
+    color: #444444;
+    transition: color 0.2s ease;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+}
+
+footer .social-links a:hover {
+    color: #666666;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+footer .copyright {
+    color: #333333;
+    text-align: center;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-text {
+        font-size: 3.5rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .button-group a {
+        margin: 0.5rem 0;
+    }
+    
+    .accordion-trigger {
+        padding: 1rem;
+    }
+
+    footer {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    footer .social-links {
+        gap: 1.5rem;
+    }
+
+    footer .social-links a {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 1.5rem;
+    }
+    
+    .header-text {
+        font-size: 2.8rem;
+    }
+    
+    footer .social-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Ensure consistent font across all elements */
+h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+}
