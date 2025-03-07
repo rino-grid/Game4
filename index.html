@@ -7,7 +7,7 @@
     <title>EXAMEN</title>
     
     <!-- Meta Description -->
-    <meta name="description" content="EXAMEN - A visually striking website with dynamic WebGL shader effects and modern UI components.">
+    <meta name="description" content="EXAMEN">
     
     <script type="module">
         document.documentElement.classList.remove('no-js');
@@ -147,48 +147,44 @@
             <div class="accordion-container">
                 <div class="accordion-item">
                     <button class="accordion-trigger">
-                        <span>What is EXAMEN?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <span>> What is EXAMEN?</span>
                     </button>
                     <div class="accordion-content">
                         <div class="p-4">
-                            <p>EXAMEN is a visually striking website with dynamic WebGL shader effects and modern UI components, showcasing creative design and interactive elements.</p>
+                            <p>Videogame</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="accordion-item">
                     <button class="accordion-trigger">
-                        <span>What technologies are used?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <span>> When will it be done?</span>
                     </button>
                     <div class="accordion-content">
                         <div class="p-4">
-                            <p>The website is built using HTML5, CSS3, JavaScript (ES6+), WebGL for shader effects, Tailwind CSS, and shadcn UI components. It features responsive design that works on various screen sizes.</p>
+                            <p>May</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="accordion-item">
                     <button class="accordion-trigger">
-                        <span>What are the key features?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <span>> What engine is it using?</span>
                     </button>
                     <div class="accordion-content">
                         <div class="p-4">
-                            <p>Key features include a dynamic WebGL shader background effect, clean modern UI with a dark theme, shadcn UI components including buttons, image cards, and accordion, a responsive 2x2 image grid, and print-friendly styling.</p>
+                            <p>Unity 6</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="accordion-item">
                     <button class="accordion-trigger">
-                        <span>Browser Compatibility</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <span>> Will it be co-op?</span>
                     </button>
                     <div class="accordion-content">
                         <div class="p-4">
-                            <p>The website works best in modern browsers that support WebGL, including Chrome (recommended), Firefox, Safari, and Edge.</p>
+                            <p>No</p>
                         </div>
                     </div>
                 </div>
@@ -223,7 +219,7 @@
                         </a>
                     </div>
                     <div class="copyright font-bold mt-4">
-                        &copy; 2025
+                        &copy; <span id="current-year"></span>
                     </div>
                 </div>
             </div>
@@ -233,5 +229,9 @@
     <!-- JavaScript -->
     <script src="assets/js/shader.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

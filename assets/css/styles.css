@@ -277,16 +277,14 @@ canvas {
 /* Accordion Styles */
 .accordion-container {
     width: 100%;
-    border-radius: 0.5rem;
-    background-color: hsl(var(--card));
-    border: 1px solid hsl(var(--border));
+    background-color: #000000;
     overflow: hidden;
-    font-family: 'BIZ UDMincho', serif;
-    font-weight: bold;
+    border: none;
 }
 
 .accordion-item {
-    border-bottom: 1px solid hsl(var(--border));
+    border-bottom: none;
+    margin-bottom: 0;
 }
 
 .accordion-item:last-child {
@@ -295,42 +293,47 @@ canvas {
 
 .accordion-trigger {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     text-align: left;
     background-color: transparent;
     border: none;
-    color: hsl(var(--foreground));
-    font-weight: 500;
+    color: #ffffff;
+    font-weight: 400;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-    font-family: 'BIZ UDMincho', serif;
+    transition: color 0.2s ease;
 }
 
 .accordion-trigger:hover {
-    background-color: hsl(var(--muted) / 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    background-color: transparent;
 }
 
-.accordion-icon {
-    transition: transform 0.2s ease;
-}
-
-.accordion-item[data-state="open"] .accordion-icon {
-    transform: rotate(180deg);
+.accordion-trigger span {
+    font-size: 1.15rem;
 }
 
 .accordion-content {
     overflow: hidden;
     height: 0;
     transition: height 0.2s ease;
-    font-family: 'BIZ UDMincho', serif;
-    font-weight: bold;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.65);
 }
 
 .accordion-item[data-state="open"] .accordion-content {
     height: auto;
+}
+
+.accordion-content .p-4 {
+    padding: 0.25rem 1rem 0.75rem 2rem;
+}
+
+.accordion-content p {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: 0;
 }
 
 /* Footer Styles */
