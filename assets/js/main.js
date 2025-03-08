@@ -3,6 +3,63 @@
  * Handles UI interactions and functionality
  */
 
+// Tailwind configuration
+if (typeof tailwind !== 'undefined') {
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                colors: {
+                    border: "hsl(var(--border))",
+                    input: "hsl(var(--input))",
+                    ring: "hsl(var(--ring))",
+                    background: "hsl(var(--background))",
+                    foreground: "hsl(var(--foreground))",
+                    primary: {
+                        DEFAULT: "hsl(var(--primary))",
+                        foreground: "hsl(var(--primary-foreground))",
+                    },
+                    secondary: {
+                        DEFAULT: "hsl(var(--secondary))",
+                        foreground: "hsl(var(--secondary-foreground))",
+                    },
+                    destructive: {
+                        DEFAULT: "hsl(var(--destructive))",
+                        foreground: "hsl(var(--destructive-foreground))",
+                    },
+                    muted: {
+                        DEFAULT: "hsl(var(--muted))",
+                        foreground: "hsl(var(--muted-foreground))",
+                    },
+                    accent: {
+                        DEFAULT: "hsl(var(--accent))",
+                        foreground: "hsl(var(--accent-foreground))",
+                    },
+                    popover: {
+                        DEFAULT: "hsl(var(--popover))",
+                        foreground: "hsl(var(--popover-foreground))",
+                    },
+                    card: {
+                        DEFAULT: "hsl(var(--card))",
+                        foreground: "hsl(var(--card-foreground))",
+                    },
+                },
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+            },
+        },
+    }
+}
+
+// Handle JS detection
+(function() {
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     // Accordion functionality
     const accordionItems = document.querySelectorAll('.accordion-item');
@@ -38,7 +95,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
     
     // Add any additional initialization code here
     console.log('EXAMEN initialized');
 });
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(error => {
+                console.error('Service Worker registration failed:', error);
+            });
+    });
+}
