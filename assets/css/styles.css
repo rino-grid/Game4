@@ -84,29 +84,20 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 101%; /* Increased by 1% to fix the gap on iOS */
     background: #000000;
     z-index: 5;
     transition: background 1.5s ease-out;
+    transform: translateZ(0); /* Add hardware acceleration for iOS */
 }
 
-/* Disable gradient transition for iOS */
-@supports (-webkit-touch-callout: none) {
-    .header.loaded::after {
-        background: #000000;
-        transition: none;
-    }
-}
-
-/* Keep gradient for non-iOS */
-@supports not (-webkit-touch-callout: none) {
-    .header.loaded::after {
-        background: linear-gradient(to bottom, 
-            rgba(0,0,0,0.5) 0%, 
-            rgba(0,0,0,0.7) 49.9%, 
-            rgba(0,0,0,0.99) 50%, 
-            #000000 50.1%);
-    }
+.header.loaded::after {
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,0.5) 0%, 
+        rgba(0,0,0,0.7) 50%, 
+        #000000 99%, /* Changed from 100% to 99% */
+        #000000 100%);
+    -webkit-transform: translateZ(0); /* Specific for iOS */
 }
 
 .header-text {
