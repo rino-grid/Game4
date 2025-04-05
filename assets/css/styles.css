@@ -84,19 +84,21 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% + 1px);
+    height: 100%;
     background: #000000;
+    background-size: 100% 100%;
     z-index: 5;
     transition: background 1.5s ease-out;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .header.loaded::after {
     background: linear-gradient(to bottom, 
         rgba(0,0,0,0.5) 0%, 
-        rgba(0,0,0,0.7) 50%, 
-        #000000 calc(100% + 1px));
+        rgba(0,0,0,0.7) 49.9%, 
+        rgba(0,0,0,0.99) 50%, 
+        #000000 50.1%);
 }
 
 .header-text {
