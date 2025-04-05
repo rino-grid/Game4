@@ -99,7 +99,51 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
+    // Initial setup - disable scrolling
+    document.body.classList.add('loading');
+
+    // Trigger all animations
+    const header = document.querySelector('.header');
+    setTimeout(() => {
+        header.classList.add('loaded');
+        
+        // Content sections
+        document.querySelector('.content').style.opacity = '1';
+        
+        // Buttons
+        setTimeout(() => {
+            document.querySelectorAll('.button-group').forEach(el => {
+                el.style.opacity = '1';
+            });
+        }, 300);
+        
+        // Image grid
+        setTimeout(() => {
+            document.querySelectorAll('.image-card').forEach(el => {
+                el.style.opacity = '1';
+            });
+        }, 500);
+    }, 100);
+    
     // Add any additional initialization code here
+    const headerText = document.querySelector('.header-text');
+    setTimeout(() => {
+        headerText.classList.add('visible');
+    }, 1000); // Delay to ensure shader is loaded
+    
+    // Start animation immediately but slower (500ms instead of 1000ms)
+    headerText.style.transform = 'scale(0.95)';
+    headerText.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
+    
+    setTimeout(() => {
+        headerText.style.transform = 'scale(1)';
+    }, 100);
+    
+    // After all animations complete (2.5s total)
+    setTimeout(() => {
+        document.body.classList.remove('loading');
+    }, 2500);
+    
     console.log('EXAMEN initialized');
 });
 
