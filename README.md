@@ -1,4 +1,4 @@
-# EXAMEN - Website
+# Persistent Object - Website
 
 A visually striking website with dynamic WebGL shader effects.
 
@@ -7,7 +7,7 @@ A visually striking website with dynamic WebGL shader effects.
 The project follows a clean, organized structure:
 
 ```
-EXAMEN/
+Persistent Object/
 ├── assets/
 │   ├── css/
 │   │   ├── styles.css    # Main stylesheet

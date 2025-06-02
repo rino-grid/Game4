@@ -1,7 +1,7 @@
 {
-  "name": "EXAMEN",
-  "short_name": "EXAMEN",
-  "description": "EXAMEN - An immersive videogame experience",
+  "name": "Persistent Object",
+  "short_name": "Persistent Object",
+  "description": "Persistent Object - An immersive videogame experience",
   "icons": [
     {
       "src": "assets/images/icon-192.png",

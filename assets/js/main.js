@@ -1,5 +1,5 @@
 /**
- * EXAMEN - Main JavaScript
+ * Persistent Object - Main JavaScript
  * Handles UI interactions and functionality
  */
 
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('loading');
     }, 2500);
     
-    console.log('EXAMEN initialized');
+    console.log('Persistent Object initialized');
 });
 
 // Service Worker Registration

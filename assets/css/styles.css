@@ -1,4 +1,4 @@
-/* EXAMEN - Main Stylesheet */
+/* Persistent Object - Main Stylesheet */
 
 /* shadcn UI CSS variables */
 :root {
@@ -33,6 +33,7 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    letter-spacing: -0.02em;
 }
 
 /* Keep Inter font for specific UI components that need it */
@@ -103,7 +104,6 @@ body {
 .header-text {
     font-size: clamp(3rem, 10vw, 6rem);
     text-align: center;
-    letter-spacing: 0;
     z-index: 10;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     opacity: 0;
@@ -277,7 +277,7 @@ canvas {
     transform: translateY(-4px);
 }
 
-/* Horizontal scanlines effect */
+/* Horizontal scanlines effect
 .image-card::before {
     content: '';
     position: absolute;
@@ -298,7 +298,7 @@ canvas {
     mix-blend-mode: overlay;
     opacity: 1;
     animation: scanlineMove 8s linear infinite;
-}
+} */
 
 @keyframes scanlineMove {
     from {
@@ -419,7 +419,6 @@ footer .copyright {
     color: #333333;
     text-align: center;
     font-size: 1.4rem;
-    letter-spacing: 0.5px;
 }
 
 /* Responsive adjustments */
@@ -470,6 +469,7 @@ footer .copyright {
         gap: 2rem;
     }
 }
+
 
 /* Ensure consistent font across all elements */
 h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {

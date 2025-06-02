@@ -1,5 +1,5 @@
 /**
- * EXAMEN - WebGL Shader Implementation
+ * Persistent Object - WebGL Shader Implementation
  * Provides a dynamic background effect for the game's header
  */
 
