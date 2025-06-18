@@ -77,6 +77,7 @@ body {
     height: 50vh;
     width: 100%;
     overflow: hidden;
+    background-color: white; /* Add white background to match the image */
 }
 
 .header::after {
@@ -102,14 +103,44 @@ body {
 }
 
 .header-text {
-    font-size: clamp(3rem, 10vw, 6rem);
-    text-align: center;
+    position: relative;
     z-index: 10;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-    will-change: opacity, transform;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.persistent-text {
+    color: white;
+    font-size: 10vw;
+    line-height: 0.9;
+    margin: 0;
+    padding: 0;
+    font-weight: 900;
+    text-shadow: none;
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.05em;
+}
+
+.object-text {
+    color: white;
+    font-size: 7.5vw;
+    line-height: 0.9;
+    margin: 0;
+    margin-top: -0.4vw; /* Increased overlap */
+    padding: 0;
+    font-weight: 900;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.05em;
 }
 
 .header-text.visible {
