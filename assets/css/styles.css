@@ -119,7 +119,7 @@ body {
 
 .persistent-text {
     color: white;
-    font-size: 10vw;
+    font-size: clamp(3.5rem, 10vw, 8rem);
     line-height: 0.9;
     margin: 0;
     padding: 0;
@@ -132,7 +132,7 @@ body {
 
 .object-text {
     color: white;
-    font-size: 7.5vw;
+    font-size: clamp(2.5rem, 7.5vw, 6rem);
     line-height: 0.9;
     margin: 0;
     margin-top: -0.4vw; /* Increased overlap */
@@ -141,6 +141,20 @@ body {
     position: relative;
     z-index: 1;
     letter-spacing: -0.05em;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .persistent-text {
+        font-size: clamp(3.5rem, 15vw, 6rem);
+        line-height: 0.85;
+    }
+    
+    .object-text {
+        font-size: clamp(2.5rem, 11.25vw, 4.5rem);
+        line-height: 0.9;
+        margin-top: -0.4vw;
+    }
 }
 
 .header-text.visible {
