@@ -6,8 +6,11 @@ import Navigation from '../../components/Navigation'
 import SteamAuth from '../components/SteamAuth'
 import dynamic from 'next/dynamic'
 
-// Dynamically import the same shader used on the home page to ensure identical visuals
-const ShaderCanvas = dynamic(() => import('../../components/ShaderCanvas'), { ssr: false })
+// We don't expect any props for ShaderCanvas, so use an empty object for its props type
+const ShaderCanvas = dynamic<{}>(
+  () => import('../../components/ShaderCanvas').then(mod => mod.default),
+  { ssr: false }
+)
 
 interface SteamUser {
   steamid: string
@@ -32,7 +35,7 @@ export default function DashboardClient() {
       })
       
       if (response.ok) {
-        const userData = await response.json()
+        const userData: SteamUser = await response.json()
         setUser(userData)
       }
     } catch (error) {
