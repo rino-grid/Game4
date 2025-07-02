@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Navigation from '../../components/Navigation'
 import SteamAuth from '../components/SteamAuth'
+import DashboardShader from '../components/DashboardShader'
 
 interface SteamUser {
   steamid: string
@@ -69,16 +70,17 @@ export default function DashboardClient() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white relative">
+      <DashboardShader avatarUrl={user?.avatarfull} />
       <Navigation />
       
-      <div className="container mx-auto px-4 pt-20 pb-8">
-        <div className="max-w-4xl mx-auto">
+              <div className="container mx-auto px-4 pt-20 pb-8 relative z-10">
+          <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-8 text-center">GAME DASHBOARD</h1>
           
           {!user ? (
             <div className="text-center">
-              <div className="bg-[#111111] p-8 rounded-lg border border-[#222222] mb-8">
+              <div className="dashboard-card p-8 rounded-lg mb-8">
                 <h2 className="text-2xl font-bold mb-4">Welcome to Persistent Object</h2>
                 <p className="text-gray-400 mb-6">
                   Connect your Steam account to access the full game dashboard experience.
@@ -86,18 +88,18 @@ export default function DashboardClient() {
                 <SteamAuth onLoginSuccess={handleLoginSuccess} />
               </div>
               
-              <div className="bg-[#111111] p-6 rounded-lg border border-[#222222]">
+              <div className="dashboard-card p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">Coming Soon</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                  <div className="bg-[#1a1a1a] p-4 rounded border border-[#333333]">
+                  <div className="dashboard-card-inner p-4 rounded">
                     <h4 className="font-bold mb-2">Game Progress</h4>
                     <p className="text-gray-400">Track your achievements and progress</p>
                   </div>
-                  <div className="bg-[#1a1a1a] p-4 rounded border border-[#333333]">
+                  <div className="dashboard-card-inner p-4 rounded">
                     <h4 className="font-bold mb-2">Community</h4>
                     <p className="text-gray-400">Connect with other players</p>
                   </div>
-                  <div className="bg-[#1a1a1a] p-4 rounded border border-[#333333]">
+                  <div className="dashboard-card-inner p-4 rounded">
                     <h4 className="font-bold mb-2">Updates</h4>
                     <p className="text-gray-400">Latest game news and patches</p>
                   </div>
@@ -107,7 +109,7 @@ export default function DashboardClient() {
           ) : (
             <div className="space-y-6">
               {/* User Profile Card */}
-              <div className="bg-[#111111] p-6 rounded-lg border border-[#222222]">
+              <div className="dashboard-card p-6 rounded-lg">
                 <div className="flex items-center gap-4 mb-4">
                   <Image 
                     src={user.avatarfull} 
@@ -132,7 +134,7 @@ export default function DashboardClient() {
 
               {/* Dashboard Content */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="bg-[#111111] p-6 rounded-lg border border-[#222222]">
+                <div className="dashboard-card p-6 rounded-lg">
                   <h3 className="text-xl font-bold mb-3">Game Status</h3>
                   <div className="text-center py-8">
                     <div className="text-orange-400 text-2xl mb-2">🚧</div>
@@ -141,7 +143,7 @@ export default function DashboardClient() {
                   </div>
                 </div>
 
-                <div className="bg-[#111111] p-6 rounded-lg border border-[#222222]">
+                <div className="dashboard-card p-6 rounded-lg">
                   <h3 className="text-xl font-bold mb-3">Community</h3>
                   <div className="text-center py-8">
                     <div className="text-blue-400 text-2xl mb-2">👥</div>
@@ -150,7 +152,7 @@ export default function DashboardClient() {
                   </div>
                 </div>
 
-                <div className="bg-[#111111] p-6 rounded-lg border border-[#222222]">
+                <div className="dashboard-card p-6 rounded-lg">
                   <h3 className="text-xl font-bold mb-3">Settings</h3>
                   <div className="text-center py-8">
                     <div className="text-gray-400 text-2xl mb-2">⚙️</div>
@@ -161,7 +163,7 @@ export default function DashboardClient() {
               </div>
 
               {/* News/Updates Section */}
-              <div className="bg-[#111111] p-6 rounded-lg border border-[#222222]">
+              <div className="dashboard-card p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4">Latest Updates</h3>
                 <div className="space-y-4">
                   <div className="border-l-4 border-blue-400 pl-4">

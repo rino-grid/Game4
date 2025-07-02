@@ -52,7 +52,7 @@ export default function SteamAuth({ onLoginSuccess }: SteamAuthProps) {
       <a
         href={steamUrl}
         onClick={handleSteamLogin}
-        className={`flex items-center gap-3 bg-[#171a21] hover:bg-[#1b2129] border border-[#2a475e] text-white px-6 py-3 rounded-md transition-colors text-decoration-none ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`steam-auth-button flex items-center gap-3 bg-[#171a21] hover:bg-[#1b2129] border border-[#2a475e] text-white px-6 py-3 rounded-md transition-colors text-decoration-none ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
         {...(loading ? { 'aria-disabled': true } : {})}
       >
         {loading ? (

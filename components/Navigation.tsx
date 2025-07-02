@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation'
 
 export default function Navigation() {
   const pathname = usePathname()
-  const isHome = pathname === '/'
-  const isDashboard = pathname === '/dashboard'
+  const isHome = pathname === '/' || pathname === ''
+  const isDashboard = pathname === '/dashboard' || pathname === '/dashboard/'
   const showTitle = isDashboard
 
   return (
