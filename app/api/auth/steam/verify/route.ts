@@ -49,7 +49,32 @@ export async function GET(request: NextRequest) {
       }
     }
     
-    // Fallback: return basic session data without Steam API
+    // Fallback: Try to get basic profile data from Steam profile XML (no API key needed)
+    try {
+      const profileResponse = await fetch(`https://steamcommunity.com/profiles/${steamid}?xml=1`)
+      if (profileResponse.ok) {
+        const profileXml = await profileResponse.text()
+        
+        // Parse avatar from XML
+        const avatarMatch = profileXml.match(/<avatarFull><!\[CDATA\[(.*?)\]\]><\/avatarFull>/)
+        const avatarMediumMatch = profileXml.match(/<avatarMedium><!\[CDATA\[(.*?)\]\]><\/avatarMedium>/)
+        const nameMatch = profileXml.match(/<steamID><!\[CDATA\[(.*?)\]\]><\/steamID>/)
+        
+        if (avatarMatch && nameMatch) {
+          return NextResponse.json({
+            steamid,
+            personaname: nameMatch[1],
+            avatar: avatarMediumMatch ? avatarMediumMatch[1] : avatarMatch[1],
+            avatarfull: avatarMatch[1],
+            profileurl: `https://steamcommunity.com/profiles/${steamid}`
+          })
+        }
+      }
+    } catch (error) {
+      console.log('Could not fetch Steam profile XML:', error)
+    }
+
+    // Ultimate fallback: return basic session data
     return NextResponse.json({
       steamid,
       personaname: `Player ${steamid.slice(-4)}`,
