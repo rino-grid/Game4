@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 interface SteamAuthProps {
   onLoginSuccess: (userData: any) => void
@@ -8,43 +8,52 @@ interface SteamAuthProps {
 
 export default function SteamAuth({ onLoginSuccess }: SteamAuthProps) {
   const [loading, setLoading] = useState(false)
+  const [steamUrl, setSteamUrl] = useState<string>('')
 
-  const handleSteamLogin = async () => {
-    setLoading(true)
+  useEffect(() => {
+    // Generate Steam OpenID URL on component mount
+    const isLocalhost = typeof window !== 'undefined' && 
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     
-    try {
-      // Redirect to Steam OpenID authentication
-      // Force the correct domain regardless of hosting environment
-      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-      const baseUrl = isLocalhost 
-        ? 'http://localhost:3000'
-        : 'https://po.gridbased.dev'
-      
-      const returnUrl = `${baseUrl}/api/auth/steam/return`
-      
-      const steamOpenIdUrl = `https://steamcommunity.com/openid/login?` +
-        `openid.ns=http://specs.openid.net/auth/2.0&` +
-        `openid.mode=checkid_setup&` +
-        `openid.return_to=${encodeURIComponent(returnUrl)}&` +
-        `openid.realm=${encodeURIComponent(baseUrl)}&` +
-        `openid.identity=http://specs.openid.net/auth/2.0/identifier_select&` +
-        `openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select`
-      
-      // Redirect to Steam
-      window.location.href = steamOpenIdUrl
-      
-    } catch (error) {
-      console.error('Steam login failed:', error)
-      setLoading(false)
+    const baseUrl = isLocalhost 
+      ? 'http://localhost:3000'
+      : 'https://po.gridbased.dev'
+    
+    const returnUrl = `${baseUrl}/api/auth/steam/return`
+    
+    const steamOpenIdUrl = `https://steamcommunity.com/openid/login?` +
+      `openid.ns=http://specs.openid.net/auth/2.0&` +
+      `openid.mode=checkid_setup&` +
+      `openid.return_to=${encodeURIComponent(returnUrl)}&` +
+      `openid.realm=${encodeURIComponent(baseUrl)}&` +
+      `openid.identity=http://specs.openid.net/auth/2.0/identifier_select&` +
+      `openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select`
+    
+    setSteamUrl(steamOpenIdUrl)
+  }, [])
+
+  const handleSteamLogin = (e: React.MouseEvent) => {
+    // Prevent clicking if already loading
+    if (loading) {
+      e.preventDefault()
+      return
     }
+    
+    // Log for debugging
+    console.log('Steam login clicked, redirecting to:', steamUrl)
+    
+    // Add loading state for enhanced experience
+    setLoading(true)
+    // Let the natural link behavior handle the redirect
   }
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <button
+      <a
+        href={steamUrl}
         onClick={handleSteamLogin}
-        disabled={loading}
-        className="flex items-center gap-3 bg-[#171a21] hover:bg-[#1b2129] border border-[#2a475e] text-white px-6 py-3 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className={`flex items-center gap-3 bg-[#171a21] hover:bg-[#1b2129] border border-[#2a475e] text-white px-6 py-3 rounded-md transition-colors text-decoration-none ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        {...(loading ? { 'aria-disabled': true } : {})}
       >
         {loading ? (
           <>
@@ -59,7 +68,7 @@ export default function SteamAuth({ onLoginSuccess }: SteamAuthProps) {
             <span>Sign in through Steam</span>
           </>
         )}
-      </button>
+      </a>
       
       <p className="text-xs text-gray-500 text-center max-w-sm">
         We use Steam OpenID to verify your identity. No passwords or sensitive data are shared.
