@@ -6,7 +6,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://persistent-object.gridbased.dev'),
+  metadataBase: new URL('https://po.gridbased.dev'),
   title: {
     default: 'Persistent Object - Game by Gridbased',
     template: '%s | Persistent Object'
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://persistent-object.gridbased.dev',
+    url: 'https://po.gridbased.dev',
     title: 'Persistent Object - Innovative Game by Gridbased',
     description: 'Experience the future of gaming with Persistent Object. Built with Unity 6, featuring cutting-edge technology and immersive gameplay. Join our community today.',
     siteName: 'Persistent Object',
@@ -103,8 +103,8 @@ const jsonLd = {
   },
   gameEngine: 'Unity 6',
   genre: 'Video Game',
-  url: 'https://persistent-object.gridbased.dev',
-  image: 'https://persistent-object.gridbased.dev/assets/images/preview.jpg',
+  url: 'https://po.gridbased.dev',
+  image: 'https://po.gridbased.dev/assets/images/preview.jpg',
   datePublished: '2025',
   operatingSystem: 'PC',
   applicationCategory: 'Game',
@@ -141,7 +141,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="canonical" href="https://persistent-object.gridbased.dev" />
+        <link rel="canonical" href="https://po.gridbased.dev" />
       </head>
       <body className={`min-h-screen bg-black text-white ${inter.className}`}>
         {children}

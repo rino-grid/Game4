@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/private/', '/api/'],
     },
-    sitemap: 'https://persistent-object.gridbased.dev/sitemap.xml',
+    sitemap: 'https://po.gridbased.dev/sitemap.xml',
   }
 }

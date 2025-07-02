@@ -38,7 +38,7 @@ If you want full Steam profile information:
 1. **Visit**: https://steamcommunity.com/dev/apikey
 2. **Sign in** with your Steam account
 3. **Fill out the form**:
-   - Domain: `persistent-object.gridbased.dev`
+   - Domain: `po.gridbased.dev`
    - Agree to terms
 4. **Get your API key**
 5. **Add to Netlify environment variables**:
