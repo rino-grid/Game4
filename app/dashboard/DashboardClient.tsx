@@ -4,7 +4,10 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Navigation from '../../components/Navigation'
 import SteamAuth from '../components/SteamAuth'
-import DashboardShader from '../components/DashboardShader'
+import dynamic from 'next/dynamic'
+
+// Dynamically import the same shader used on the home page to ensure identical visuals
+const ShaderCanvas = dynamic(() => import('../../components/ShaderCanvas'), { ssr: false })
 
 interface SteamUser {
   steamid: string
@@ -71,7 +74,8 @@ export default function DashboardClient() {
 
   return (
     <div className="min-h-screen bg-black text-white relative">
-      <DashboardShader avatarUrl={user?.avatarfull} />
+      {/* Background shader */}
+      <ShaderCanvas />
       <Navigation />
       
               <div className="container mx-auto px-4 pt-20 pb-8 relative z-10">
