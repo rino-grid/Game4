@@ -27,6 +27,9 @@ export default function HomePageClient() {
       }, 2500)
     }, 100)
 
+    // Update year
+    setCurrentYear(new Date().getFullYear())
+
     return () => clearTimeout(timer)
   }, [])
 

@@ -497,3 +497,15 @@ h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
     font-family: 'BIZ UDMincho', serif;
     font-weight: bold;
 }
+
+/* Ensure header text uses BIZ UDMincho */
+.persistent-text, .object-text {
+    font-family: 'BIZ UDMincho', serif !important;
+    font-weight: bold !important;
+}
+
+/* Ensure footer copyright uses BIZ UDMincho */
+footer .copyright {
+    font-family: 'BIZ UDMincho', serif !important;
+    font-weight: bold !important;
+}

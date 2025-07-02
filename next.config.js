@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static export for deployment platforms like Netlify
-  output: 'export',
+  // Note: For Steam authentication, we need runtime features
+  // Static export is disabled to allow API routes
+  // output: 'export',
   
-  // Disable image optimization for static export
+  // Keep image optimization disabled for broader compatibility
   images: {
     unoptimized: true
   },
