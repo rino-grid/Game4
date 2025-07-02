@@ -1,0 +1,499 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* shadcn UI CSS variables */
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+}
+
+/* Global font settings */
+body {
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    letter-spacing: -0.02em;
+}
+
+/* Keep Inter font for specific UI components that need it */
+.shadcn-component {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Font utilities */
+.font-biz {
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+}
+
+/* Black Scrollbar - smaller and darker */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222222;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333333;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: white; /* Add white background to match the image */
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 101%; /* Increased by 1% to fix the gap on iOS */
+    background: #000000;
+    z-index: 5;
+    transition: background 1.5s ease-out;
+    transform: translateZ(0); /* Add hardware acceleration for iOS */
+}
+
+.header.loaded::after {
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,0.5) 0%, 
+        rgba(0,0,0,0.7) 50%, 
+        #000000 99%, /* Changed from 100% to 99% */
+        #000000 100%);
+    -webkit-transform: translateZ(0); /* Specific for iOS */
+}
+
+.header-text {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.persistent-text {
+    color: white;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    line-height: 0.9;
+    margin: 0;
+    padding: 0;
+    font-weight: 900;
+    text-shadow: none;
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.05em;
+}
+
+.object-text {
+    color: white;
+    font-size: clamp(2.5rem, 7.5vw, 6rem);
+    line-height: 0.9;
+    margin: 0;
+    margin-top: -0.4vw; /* Increased overlap */
+    padding: 0;
+    font-weight: 900;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.05em;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .persistent-text {
+        font-size: clamp(3.5rem, 15vw, 6rem);
+        line-height: 0.85;
+    }
+    
+    .object-text {
+        font-size: clamp(2.5rem, 11.25vw, 4.5rem);
+        line-height: 0.9;
+        margin-top: -0.4vw;
+    }
+}
+
+.header-text.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.shader-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.content {
+    background-color: #000000;
+    padding: 3rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0;
+    transition: opacity 1s ease-out 1.5s; /* Delay matches header animation */
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+.button-group a {
+    flex: 1 1 auto;
+    min-width: 150px;
+    text-align: center;
+}
+
+.loaded ~ .content {
+    opacity: 1;
+}
+
+.loaded ~ .content .button-group {
+    transition-delay: 1.8s;
+    opacity: 1;
+}
+
+.loaded ~ .content .image-card {
+    transition-delay: 2s;
+    opacity: 1;
+}
+
+@media (max-width: 640px) {
+    .button-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .button-group a {
+        width: 100%;
+    }
+}
+
+/* shadcn UI Button Styles */
+.btn-primary,
+.btn-secondary,
+.btn-ghost,
+.btn-destructive {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    font-weight: bold;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    height: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'BIZ UDMincho', serif;
+}
+
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-ghost:focus,
+.btn-destructive:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-ghost:disabled,
+.btn-destructive:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+}
+
+.btn-secondary:hover {
+    background-color: hsl(var(--secondary) / 0.8);
+}
+
+/* Ghost Button */
+.btn-ghost {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+}
+
+.btn-ghost:hover {
+    background-color: hsl(var(--muted) / 0.3);
+}
+
+/* Destructive Button */
+.btn-destructive {
+    background-color: hsl(var(--destructive));
+    color: hsl(var(--destructive-foreground));
+}
+
+.btn-destructive:hover {
+    background-color: hsl(var(--destructive) / 0.9);
+}
+
+/* Image Card Styles */
+.image-card {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    position: relative;
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+.image-card:hover {
+    transform: translateY(-4px);
+}
+
+@keyframes scanlineMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 100px;
+    }
+}
+
+/* Remove the flicker effect */
+.image-card::after {
+    display: none;
+}
+
+/* Accordion Styles */
+.accordion-container {
+    width: 100%;
+    background-color: #000000;
+    overflow: hidden;
+    border: none;
+}
+
+.accordion-item {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-trigger {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-weight: 400;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.accordion-trigger:hover {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: transparent;
+}
+
+.accordion-trigger span {
+    font-size: 1.15rem;
+}
+
+.accordion-content {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.2s ease;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.accordion-item[data-state="open"] .accordion-content {
+    height: auto;
+}
+
+.accordion-content .p-4 {
+    padding: 0.25rem 1rem 0.75rem 2rem;
+}
+
+.accordion-content p {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Prevent scrolling during load but keep scrollbar */
+body.loading {
+    position: fixed;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+/* Footer Styles */
+footer {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+}
+
+footer .social-links {
+    margin-bottom: 3.5rem;
+    width: 100%;
+    max-width: 700px;
+}
+
+footer .social-links a {
+    color: #444444;
+    transition: color 0.2s ease;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+}
+
+footer .social-links a:hover {
+    color: #666666;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+footer .copyright {
+    color: #333333;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-text {
+        font-size: 3.5rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .button-group a {
+        margin: 0.5rem 0;
+    }
+    
+    .accordion-trigger {
+        padding: 1rem;
+    }
+
+    footer {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    footer .social-links {
+        gap: 1.5rem;
+    }
+
+    footer .social-links a {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 1.5rem;
+    }
+
+    .header-text {
+        font-size: 2.5rem;
+    }
+
+    footer .social-links {
+        gap: 1rem;
+    }
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
+    font-family: 'BIZ UDMincho', serif;
+    font-weight: bold;
+}

@@ -1,0 +1,30 @@
+/* Persistent Object - Print Stylesheet */
+
+body {
+    font-family: 'BIZ UDMincho', serif;
+}
+
+.header::after {
+    display: none;
+}
+
+canvas {
+    display: none;
+}
+
+.header-text {
+    color: black;
+    text-shadow: none;
+}
+
+.btn {
+    border: 1px solid #000;
+    color: black;
+    background: none;
+    text-decoration: none;
+}
+
+/* Hide elements not needed for print */
+.btn-ghost, .btn-destructive {
+    display: none;
+}
