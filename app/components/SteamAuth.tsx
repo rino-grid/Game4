@@ -14,9 +14,11 @@ export default function SteamAuth({ onLoginSuccess }: SteamAuthProps) {
     
     try {
       // Redirect to Steam OpenID authentication
-      const baseUrl = process.env.NODE_ENV === 'production' 
-        ? 'https://po.gridbased.dev'
-        : 'http://localhost:3000'
+      // Force the correct domain regardless of hosting environment
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      const baseUrl = isLocalhost 
+        ? 'http://localhost:3000'
+        : 'https://po.gridbased.dev'
       
       const returnUrl = `${baseUrl}/api/auth/steam/return`
       

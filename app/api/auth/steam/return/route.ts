@@ -3,6 +3,16 @@ import crypto from 'crypto'
 
 export const dynamic = 'force-dynamic'
 
+// Helper function to get the correct redirect URL
+function getRedirectUrl(request: NextRequest): string {
+  const hostname = new URL(request.url).hostname
+  const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1'
+  
+  return isLocalhost 
+    ? 'http://localhost:3000'
+    : 'https://po.gridbased.dev'
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   
@@ -12,13 +22,15 @@ export async function GET(request: NextRequest) {
     const identity = searchParams.get('openid.identity')
     
     if (mode !== 'id_res' || !identity) {
-      return NextResponse.redirect(new URL('/dashboard?error=invalid_response', request.url))
+      const redirectUrl = getRedirectUrl(request)
+      return NextResponse.redirect(new URL('/dashboard?error=invalid_response', redirectUrl))
     }
 
     // Extract Steam ID from identity URL
     const steamIdMatch = identity.match(/https:\/\/steamcommunity\.com\/openid\/id\/(\d+)/)
     if (!steamIdMatch) {
-      return NextResponse.redirect(new URL('/dashboard?error=invalid_steam_id', request.url))
+      const redirectUrl = getRedirectUrl(request)
+      return NextResponse.redirect(new URL('/dashboard?error=invalid_steam_id', redirectUrl))
     }
     
     const steamId = steamIdMatch[1]
@@ -43,7 +55,8 @@ export async function GET(request: NextRequest) {
     const verifyText = await verifyResponse.text()
     
     if (!verifyText.includes('is_valid:true')) {
-      return NextResponse.redirect(new URL('/dashboard?error=verification_failed', request.url))
+      const redirectUrl = getRedirectUrl(request)
+      return NextResponse.redirect(new URL('/dashboard?error=verification_failed', redirectUrl))
     }
 
     // Fetch user data from Steam Web API (optional, requires API key)
@@ -55,7 +68,8 @@ export async function GET(request: NextRequest) {
     // In production, store this in a database or Redis
     // For now, we'll use a cookie with the steam ID
     
-    const response = NextResponse.redirect(new URL('/dashboard?success=true', request.url))
+    const redirectUrl = getRedirectUrl(request)
+    const response = NextResponse.redirect(new URL('/dashboard?success=true', redirectUrl))
     
     // Set session cookie
     response.cookies.set('steam_session', JSON.stringify({
@@ -73,6 +87,7 @@ export async function GET(request: NextRequest) {
     
   } catch (error) {
     console.error('Steam auth error:', error)
-    return NextResponse.redirect(new URL('/dashboard?error=server_error', request.url))
+    const redirectUrl = getRedirectUrl(request)
+    return NextResponse.redirect(new URL('/dashboard?error=server_error', redirectUrl))
   }
 }
