@@ -4,25 +4,25 @@
 
 /* shadcn UI CSS variables */
 :root {
-  --background: 0 0% 0%; /* black */
-  --foreground: 0 0% 98%; /* near white */
-  --card: 0 0% 7%; /* very dark grey */
-  --card-foreground: 0 0% 98%; /* near white */
-  --popover: 0 0% 7%; /* very dark grey */
-  --popover-foreground: 0 0% 98%; /* near white */
-  --primary: 0 0% 98%; /* near white */
-  --primary-foreground: 0 0% 9%; /* very dark grey */
-  --secondary: 0 0% 13%; /* dark grey */
-  --secondary-foreground: 0 0% 98%; /* near white */
-  --muted: 0 0% 13%; /* dark grey */
-  --muted-foreground: 0 0% 60%; /* light grey */
-  --accent: 0 0% 13%; /* dark grey */
-  --accent-foreground: 0 0% 98%; /* near white */
-  --destructive: 0 72% 51%; /* red */
-  --destructive-foreground: 0 0% 98%; /* near white */
-  --border: 0 0% 13%; /* dark grey */
-  --input: 0 0% 13%; /* dark grey */
-  --ring: 0 0% 83%; /* light grey */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
   --radius: 0.5rem;
 }
 
@@ -30,8 +30,8 @@
 body {
     font-family: 'BIZ UDMincho', serif;
     font-weight: bold;
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: black;
+    color: white;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -510,7 +510,7 @@ footer .copyright {
     height: 100vh;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.5; /* Reduced opacity */
+    opacity: 0.3; /* Reduced opacity further */
 }
 
 .dashboard-card {

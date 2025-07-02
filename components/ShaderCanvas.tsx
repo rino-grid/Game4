@@ -145,13 +145,13 @@ const ShaderCanvas: React.FC<ShaderCanvasProps> = ({ className = "shader-canvas"
         float waveSpeed = 0.02;
         float waveFrequency = 2.2;
         float waveAmplitude = 0.4;
-        vec3 waveColor = vec3(0.7, 0.7, 0.7);
+        vec3 waveColor = vec3(0.3, 0.3, 0.3); // Made waveColor darker
         
         // Generate wave pattern
         float f = pattern(uv, u_time, waveSpeed, waveFrequency, waveAmplitude);
         
         // Map pattern to color
-        vec3 color = mix(vec3(0.1, 0.1, 0.1), waveColor, f);
+        vec3 color = mix(vec3(0.0, 0.0, 0.0), waveColor, f); // Used pure black as base
         
         // Apply dithering
         float colorNum = 4.0;
