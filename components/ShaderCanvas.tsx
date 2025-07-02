@@ -2,7 +2,11 @@
 
 import React, { useEffect, useRef } from 'react'
 
-const ShaderCanvas: React.FC = () => {
+interface ShaderCanvasProps {
+  className?: string
+}
+
+const ShaderCanvas: React.FC<ShaderCanvasProps> = ({ className = "shader-canvas" }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -368,7 +372,7 @@ const ShaderCanvas: React.FC = () => {
   return (
     <canvas 
       ref={canvasRef}
-      className="shader-canvas"
+      className={className}
       id="shader-canvas"
     />
   )
