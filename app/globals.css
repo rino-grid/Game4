@@ -502,6 +502,16 @@ footer .copyright {
 }
 
 /* Dashboard shader background effects */
+.dashboard-shader-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .dashboard-card {
     background-color: rgba(17, 17, 17, 0.9) !important;
     backdrop-filter: blur(4px);
