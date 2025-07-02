@@ -37,7 +37,7 @@ export default function Forum() {
               <div className="text-center">
                 <h2 className="text-3xl font-bold mb-4 text-white">Community Coming Soon</h2>
                 <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-                  We're building an amazing community platform where players can connect, share experiences, 
+                  We&apos;re building an amazing community platform where players can connect, share experiences, 
                   and help shape the future of Persistent Object. Stay tuned for launch updates!
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
