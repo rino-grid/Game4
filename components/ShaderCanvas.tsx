@@ -3,10 +3,16 @@
 import React, { useEffect, useRef } from 'react'
 
 interface ShaderCanvasProps {
-  className?: string
+  className?: string;
+  baseColorVec3?: [number, number, number];
+  waveColorVec3?: [number, number, number];
 }
 
-const ShaderCanvas: React.FC<ShaderCanvasProps> = ({ className = "shader-canvas" }) => {
+const ShaderCanvas: React.FC<ShaderCanvasProps> = ({
+  className = "shader-canvas",
+  baseColorVec3 = [0.1, 0.1, 0.1], // Default to original brighter base color
+  waveColorVec3 = [0.7, 0.7, 0.7]  // Default to original brighter wave color
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -38,6 +44,8 @@ const ShaderCanvas: React.FC<ShaderCanvasProps> = ({ className = "shader-canvas"
       
       uniform vec2 u_resolution;
       uniform float u_time;
+      uniform vec3 u_baseColor;
+      uniform vec3 u_waveColor;
       
       varying vec2 v_uv;
       
@@ -141,17 +149,18 @@ const ShaderCanvas: React.FC<ShaderCanvasProps> = ({ className = "shader-canvas"
         vec2 uv = v_uv - 0.5;
         uv.x *= u_resolution.x / u_resolution.y;
         
-        // Wave parameters - adjusted for darker theme
+        // Wave parameters
         float waveSpeed = 0.02;
         float waveFrequency = 2.2;
         float waveAmplitude = 0.4;
-        vec3 waveColor = vec3(0.7, 0.7, 0.7);
+        // u_waveColor is now passed as a uniform
         
         // Generate wave pattern
         float f = pattern(uv, u_time, waveSpeed, waveFrequency, waveAmplitude);
         
         // Map pattern to color
-        vec3 color = mix(vec3(0.1, 0.1, 0.1), waveColor, f);
+        // u_baseColor is now passed as a uniform
+        vec3 color = mix(u_baseColor, u_waveColor, f);
         
         // Apply dithering
         float colorNum = 4.0;
@@ -299,6 +308,8 @@ const ShaderCanvas: React.FC<ShaderCanvasProps> = ({ className = "shader-canvas"
       // Set the uniforms
       gl.uniform2f(programInfo.uniformLocations.resolution, canvas.width, canvas.height)
       gl.uniform1f(programInfo.uniformLocations.time, time)
+      gl.uniform3fv(programInfo.uniformLocations.baseColor, baseColorVec3)
+      gl.uniform3fv(programInfo.uniformLocations.waveColor, waveColorVec3)
       
       // Draw
       const offset = 0
@@ -342,6 +353,8 @@ const ShaderCanvas: React.FC<ShaderCanvasProps> = ({ className = "shader-canvas"
       uniformLocations: {
         resolution: gl.getUniformLocation(shaderProgram, 'u_resolution'),
         time: gl.getUniformLocation(shaderProgram, 'u_time'),
+        baseColor: gl.getUniformLocation(shaderProgram, 'u_baseColor'),
+        waveColor: gl.getUniformLocation(shaderProgram, 'u_waveColor'),
       },
     }
     
@@ -367,7 +380,7 @@ const ShaderCanvas: React.FC<ShaderCanvasProps> = ({ className = "shader-canvas"
         cancelAnimationFrame(animationId)
       }
     }
-  }, [])
+  }, [baseColorVec3, waveColorVec3]) // Add dependencies to re-run effect if colors change
 
   return (
     <canvas 

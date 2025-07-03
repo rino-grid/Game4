@@ -510,6 +510,7 @@ footer .copyright {
     height: 100vh;
     z-index: 0;
     pointer-events: none;
+    opacity: 0.3; /* Reduced opacity further */
 }
 
 .dashboard-card {

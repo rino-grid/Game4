@@ -74,7 +74,11 @@ export default function DashboardClient() {
 
   return (
     <div className="min-h-screen bg-black text-white relative">
-      <ShaderCanvas className="dashboard-shader-canvas" />
+      <ShaderCanvas
+        className="dashboard-shader-canvas"
+        baseColorVec3={[0.0, 0.0, 0.0]}
+        waveColorVec3={[0.3, 0.3, 0.3]}
+      />
       <Navigation />
       
               <div className="container mx-auto px-4 pt-20 pb-8 relative z-10">
